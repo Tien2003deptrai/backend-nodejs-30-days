@@ -34,10 +34,11 @@ const userSchema = new mongoose.Schema(
 
 // Được viết những function phụ trợ liên quan - mã hoá mật khẩu, giải mã mật khẩu
 // previous - next
-userSchema.pre("save", async function (next) {
-    const salt = await bcrypt.genSalt(10); // salt: muối mã hoá 123456791
+userSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;
+
+    const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
 });
 
 // Phương thức - function để so sánh mật khẩu
