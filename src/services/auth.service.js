@@ -19,7 +19,7 @@ class AuthService {
 
         const token = signAccessToken({ userId: user._id, role: user.role });
 
-        const safeUser = pick(user, ["_id", "email", "name", "role"]);
+        const safeUser = pick(user, ["_id", "role"]);
 
         return { user: safeUser, token };
     }

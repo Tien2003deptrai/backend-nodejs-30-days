@@ -3,8 +3,10 @@ const postService = require("../services/post.service");
 class PostController {
     async createPost(req, res) {
         try {
+            const userId = req.user.userId; // lấy userId từ req.user do authMiddleware gán vào
             const newPost = req.body;
-            const result = await postService.createPost(newPost);
+
+            const result = await postService.createPost(newPost, userId);
             res.status(201).json({ message: "Post created successfully", data: result });
         } catch (error) {
             res.status(500).json("Internal server error");
@@ -49,6 +51,16 @@ class PostController {
             res.status(201).json({ message: "Post updated successfully", data: result });
         } catch (error) {
             res.status(500).json("Internal server error");
+        }
+    }
+
+    async getPostsByUserId(req, res, next) {
+        try {
+            const userId = req.user.userId;
+            const posts = await postService.getPostsByUserId(userId);
+            res.status(200).json({ message: "Posts retrieved successfully", data: posts });
+        } catch (error) {
+            next(error);
         }
     }
 

@@ -1,9 +1,8 @@
 const postModel = require("../models/post.model");
-const userModel = require("../models/user.model");
 
 class PostService {
-    createPost(newPost) {
-        return postModel.create(newPost);
+    createPost(newPost, userId) {
+        return postModel.create({ ...newPost, user: userId });
     }
 
     getListPosts() {
@@ -33,6 +32,11 @@ class PostService {
             new: true,
             runValidators: true
         })
+    }
+
+    // lấy danh sách bài viết của một user
+    getPostsByUserId(userId) {
+        return postModel.find({ user: userId })
     }
 }
 

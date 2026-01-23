@@ -14,7 +14,8 @@ const authMiddleware = async (req, res, next) => {
         const user = await userModel.findById(decoded.userId);
         if (!user) return res.status(401).json({ message: "User not found" });
 
-        req.user = { userId: user._id, role: user.role, email: user.email, name: user.name };
+        req.user = { userId: user._id, role: user.role };
+        // console.log('req.user', req.user)
         next();
     } catch (err) {
         return res.status(401).json({ message: "Unauthorized" });
