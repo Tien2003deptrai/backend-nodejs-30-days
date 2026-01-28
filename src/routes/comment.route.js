@@ -1,7 +1,7 @@
 const express = require('express');
 const commentController = require('../controllers/comment.controller');
-const commentValidator = require('../validations/comment.validator');
 const authMiddleware = require('../middlewares/auth.middleware');
+const commentValidator = require('../validations/comment.validator');
 const validate = require('../middlewares/validate.middleware');
 const router = express.Router();
 
@@ -15,4 +15,3 @@ router.post(
 
 // nhiều thằng con endpoint
 module.exports = router;
-

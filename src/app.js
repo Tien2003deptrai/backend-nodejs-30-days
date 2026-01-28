@@ -5,6 +5,7 @@ const userRoutes = require('./routes/user.route');
 const postRoutes = require('./routes/post.route');
 const authRoutes = require('./routes/auth.route');
 const commentRoutes = require('./routes/comment.route');
+const reactionRoutes = require('./routes/reaction.route');
 
 // middleware for handling errors
 const errorHandler = require('./middlewares/errorHandler');
@@ -16,7 +17,8 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/comments', commentRoutes); // cha 
+app.use('/api/comments', commentRoutes); // cha
+app.use('/api/reactions', reactionRoutes);
 
 app.use(errorHandler);
 
